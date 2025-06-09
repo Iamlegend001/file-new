@@ -1,10 +1,25 @@
 {
   "user": [
     {
-      "id":"jncsdjcnaibvfdnvalknm",
-      "username":"Arka",
-      "email":"arka@gmail.com",
-      "password":"12345678"
+      "id": 1,
+      "username": "admin",
+      "email": "admin@master",
+      "password": "12345678",
+      "isAdmin": true
+    },
+    {
+      "id": "qaaecT2Rn83GDjtVVDVwH",
+      "username": "Iamkuttu",
+      "email": "Iamkuttu@master",
+      "password": "1234546",
+      "isAdmin": false
+    },
+    {
+      "id": "86nuFsfCQvV11lx_GCR2R",
+      "username": "sasxa",
+      "email": "sasxsa@sxax",
+      "password": "123456",
+      "isAdmin": false
     }
   ],
   "products": [
@@ -30,14 +45,6 @@
         {
           "productId": 1,
           "quantity": 4
-        },
-        {
-          "productId": 2,
-          "quantity": 1
-        },
-        {
-          "productId": 3,
-          "quantity": 6
         }
       ],
       "__v": 0

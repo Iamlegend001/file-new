@@ -1,13 +1,25 @@
-import React from 'react'
+import React from "react";
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { asyncRegisterUser } from "../Store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
-  const { register, handleSubmit, reset,formState:{errors} } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const RegisterHandler = (user) => {
     user.id = nanoid();
-    console.log(user);
+    user.isAdmin = false;
+    dispatch(asyncRegisterUser(user));
+    navigate("/login");
+    reset();
   };
   return (
     <form
@@ -18,9 +30,11 @@ const Register = () => {
         className=" outline-0 border-b p-2 text-2xl mb-3"
         type="text"
         placeholder="username"
-        {...register("username",{required:"Required"})}
+        {...register("username", { required: "Required" })}
       />
-      <small className='text-red-700'>{errors.username && errors.username.message}</small>
+      <small className="text-red-700">
+        {errors.username && errors.username.message}
+      </small>
       <input
         className=" outline-0 border-b p-2 text-2xl mb-3"
         type="email"
@@ -36,16 +50,15 @@ const Register = () => {
       <button className="item-center justify-center bg-white text-black w-20 h-10 rounded-2xl">
         Register
       </button>
-     <div className="flex gap-2">
-     <p>Already have an Account ?,</p>
-      <Link to="/login" className="text-red-700">
-        {" "}
-        Click Here
-      </Link>
-     </div>
+      <div className="flex gap-2">
+        <p>Already have an Account ?,</p>
+        <Link to="/login" className="text-red-700">
+          {" "}
+          Click Here
+        </Link>
+      </div>
     </form>
   );
 };
 
-
-export default Register
+export default Register;
