@@ -1,8 +1,8 @@
+import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { nanoid } from "nanoid";
 import { Link, useNavigate } from "react-router-dom";
-import { asyncRegisterUser } from "../Store/actions/userActions";
+import { asyncRegisteruser } from "../Store/Actions/userActions";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
@@ -12,52 +12,115 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const RegisterHandler = (user) => {
+  const submitHandler = (user) => {
     user.id = nanoid();
-    user.isAdmin = false;
-    dispatch(asyncRegisterUser(user));
-    navigate("/login");
+    user.isAdmin = false
+    dispatch(asyncRegisteruser(user));
+    navigate("/login")
+    
     reset();
   };
+
   return (
-    <form
-      onSubmit={handleSubmit(RegisterHandler)}
-      className="flex flex-col w-1/2 gap-2 justify-center h-screen"
-    >
-      <input
-        className=" outline-0 border-b p-2 text-2xl mb-3"
-        type="text"
-        placeholder="username"
-        {...register("username", { required: "Required" })}
-      />
-      <small className="text-red-700">
-        {errors.username && errors.username.message}
-      </small>
-      <input
-        className=" outline-0 border-b p-2 text-2xl mb-3"
-        type="email"
-        placeholder="email"
-        {...register("email")}
-      />
-      <input
-        className=" outline-0 border-b p-2 text-2xl mb-3"
-        type="password"
-        placeholder="password"
-        {...register("password")}
-      />
-      <button className="item-center justify-center bg-white text-black w-20 h-10 rounded-2xl">
-        Register
-      </button>
-      <div className="flex gap-2">
-        <p>Already have an Account ?,</p>
-        <Link to="/login" className="text-red-700">
-          {" "}
-          Click Here
-        </Link>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
+        <div className="text-center">
+          <div className="mx-auto bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-blue-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </div>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Create your account
+          </h2>
+          <p className="mt-2 text-gray-600">Join our community today</p>
+        </div>
+
+        <form onSubmit={handleSubmit(submitHandler)} className="mt-8 space-y-6">
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Username
+              </label>
+              <input
+                {...register("username")}
+                id="username"
+                type="text"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 "
+                placeholder="Enter your name"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Email address
+              </label>
+              <input
+                {...register("email")}
+                id="email"
+                type="email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Password
+              </label>
+              <input
+                {...register("password")}
+                id="password"
+                type="password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-medium rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 shadow-md"
+            >
+              Create Account
+            </button>
+
+            <p className="text-center text-gray-600 text-sm">
+              Already have an account?
+              <Link
+                to="/login"
+                className="ml-1 font-medium text-blue-600 hover:text-blue-500 transition duration-200"
+              >
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 

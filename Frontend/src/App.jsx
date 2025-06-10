@@ -1,22 +1,17 @@
-import React, { useEffect } from 'react';
-import MainRoutes from './Routes/mainRoutes';
-import Navbar from './Components/Navbar';
-import { asyncCurrentUser } from './Store/actions/userActions';
-import { useDispatch } from 'react-redux';
+
+import Nav from './Components/Nav';
+import MainRoutes from './Routes/MainRoutes';
 
 const App = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(asyncCurrentUser());
-  }, [dispatch]);
-
+  
   return (
-    <div className='px-10 bg-black w-screen h-screen text-white'>
-      <Navbar />
-      <MainRoutes />
-    </div>
-  );
-};
 
-export default App;
+    <div className='px-[10%] w-screen text-black bg-black h-screen'>
+      <Nav/>
+      <MainRoutes/>
+    </div>
+  )
+}
+
+export default App
