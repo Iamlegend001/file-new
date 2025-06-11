@@ -2,7 +2,8 @@ import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { asyncLoginUser } from "../Store/Actions/userActions";
 
 const Login = () => {
   const {
@@ -11,10 +12,12 @@ const Login = () => {
     reset,
     formState: { errors },
   } = useForm();
-
+  const dispatch = useDispatch();
   const submitHandler = (user) => {
-    console.log(user);
-    reset();
+    
+
+    dispatch(asyncLoginUser(user));
+    // reset();
   };
 
   return (
@@ -69,7 +72,7 @@ const Login = () => {
                 Password
               </label>
               <input
-                {...register("password",{required: true})}
+                {...register("password", { required: true })}
                 id="password"
                 type="password"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"

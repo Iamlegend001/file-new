@@ -1,64 +1,84 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+  const user = useSelector((state) => state.user.users);
+  console.log(user);
   return (
-    <div className='mb-10 flex justify-center py-4 bg-gray-50 border-b border-gray-200'>
-      <div className='flex gap-8'>
-        <NavLink 
+    <div className="mb-10 flex justify-center py-4 bg-gray-50 border-b border-gray-200">
+      <div className="flex gap-8">
+        <NavLink
           to="/"
-          className={({ isActive }) => 
+          className={({ isActive }) =>
             `text-lg font-medium transition-colors duration-200 ${
-              isActive 
-                ? 'text-blue-600 border-b-2 border-blue-600' 
-                : 'text-gray-600 hover:text-blue-500'
+              isActive
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-600 hover:text-blue-500"
             }`
           }
         >
           Home
         </NavLink>
-        
-        <NavLink 
+        <NavLink
           to="/products"
-          className={({ isActive }) => 
+          className={({ isActive }) =>
             `text-lg font-medium transition-colors duration-200 ${
-              isActive 
-                ? 'text-blue-600 border-b-2 border-blue-600' 
-                : 'text-gray-600 hover:text-blue-500'
+              isActive
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-600 hover:text-blue-500"
             }`
           }
         >
           Products
-        </NavLink>
-        
-        <NavLink 
-          to="/login"
-          className={({ isActive }) => 
-            `text-lg font-medium transition-colors duration-200 ${
-              isActive 
-                ? 'text-blue-600 border-b-2 border-blue-600' 
-                : 'text-gray-600 hover:text-blue-500'
-            }`
-          }
-        >
-          Login
-        </NavLink>
-        
-        <NavLink 
+        </NavLink>{" "}
+        <NavLink
           to="/register"
-          className={({ isActive }) => 
+          className={({ isActive }) =>
             `text-lg font-medium transition-colors duration-200 ${
-              isActive 
-                ? 'text-blue-600 border-b-2 border-blue-600' 
-                : 'text-gray-600 hover:text-blue-500'
+              isActive
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-600 hover:text-blue-500"
             }`
           }
         >
           Register
         </NavLink>
+        {user ? (
+          <>
+            {" "}
+            <NavLink
+              to="/admin/create-product"
+              className={({ isActive }) =>
+                `text-lg font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-500"
+                }`
+              }
+            >
+              Create Product
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `text-lg font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-500"
+                }`
+              }
+            >
+              Login
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
