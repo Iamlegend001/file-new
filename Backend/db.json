@@ -8,7 +8,56 @@
       "isAdmin": true
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "id": "0UEIoMggxR2FvBiTbOc4e",
+      "image": "https://m.media-amazon.com/images/I/51yShcA+i0L._SX679_.jpg",
+      "title": "PALAY® UV Umbrella for Rain and Sun Protection Windproof",
+      "price": "899",
+      "description": "UMBRELLA FOR SUN PROTECTION: Stay cool and safe under the blazing sun with this umbrella for sun protection, offering UPF 50+ shield, black coated liner, and matte vinyl interior to block UV rays.",
+      "category": "Umbrella"
+    },
+    {
+      "id": "BPrJr-m_F7F0_YyjuyvJZ",
+      "image": "https://m.media-amazon.com/images/I/412C955nDQL._SX300_SY300_QL70_FMwebp_.jpg",
+      "title": "Kreo Hive Wired Full Size RGB Backlight Gaming Mechanica",
+      "price": "5000",
+      "description": "All-in-One 98 Keys Design: Enjoy a space-efficient 98-key design that retains the numeric keypad for full functionality. Perfect for gamers who need extra mouse space and professionals who want maximum productivity without a bulky setup.",
+      "category": "Keyboard"
+    },
+    {
+      "id": "R2EVPVAzoo3BnqO5s0q-k",
+      "image": "https://m.media-amazon.com/images/I/71cShFafLEL._SX679_.jpg",
+      "title": "MSI G274QPF E2 27 Inch 2K WQHD Gaming Monitor",
+      "price": "16000",
+      "description": "PS IMAGE QUALITY, FRAMELESS GAMING - MSI IPS panel monitors provide outstanding colour intensity, and support 178° wide viewing angles; A 'frameless' design reduces bezel lines between screens",
+      "category": "Monitor"
+    },
+    {
+      "id": "rpaCYJq7eVC8jyVaj-H8h",
+      "image": "https://m.media-amazon.com/images/I/81q5AiEe1kL._SX679_.jpg",
+      "title": "Ant Esports Snow Dragon Unique Mouse Pad Gaming Mouse Pad Extended",
+      "price": "339",
+      "description": "Extra Large Mouse Pad: The XL Size mousepad is designed for comfort and productivity replacing the traditional small size mouse pads. Measuring at 35.4x15.74 inches, it provides ample space to accommodate your mouse, keyboard, and other desk essentials. The extra thickness of 2mm not only reduces noise but also ensures a more comfortable experience for your hands.",
+      "category": "Deskpad"
+    },
+    {
+      "id": "oeGJxGkjBaxmXd8KYMLCC",
+      "image": "https://m.media-amazon.com/images/I/61LmjndVTHL._SX679_.jpg",
+      "title": "MOTU M4 USB-C Audio Interface with Ableton Live Lite",
+      "price": "28798",
+      "description": "ESS Sabre32 Ultra DAC technology for superb analog sound with 120 db dynamic range out put.\nBest in class speed with 2.5 ms latency.\nIndividual 48V Phantom power, Power Switch, Stand alone operation, USB-C Bus Powered.\nBest in class ESS-driven headphone output with 115 db out put.\nMade in The USA",
+      "category": "Sound"
+    },
+    {
+      "id": "rlLq4aOG9LQ0nSrKmMr42",
+      "image": "https://m.media-amazon.com/images/I/41x09uNNhwL._SY300_SX300_QL70_FMwebp_.jpg",
+      "title": "MSI MAG 275QF 27-inch 2K Gaming Monitor, 2560 x 1440 (UHD),",
+      "price": "18711",
+      "description": "Rapid IPS - Make sure the intensity and purity of colors when gaming\n180Hz High Refresh Rate - Experience smooth gaming with a blazing fast refresh rate, that gives you the upper hand in fast-moving games.",
+      "category": "monitor"
+    }
+  ],
   "carts": {
     "name": "typicode"
   }

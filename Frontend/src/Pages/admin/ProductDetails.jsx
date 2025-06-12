@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { asyncCreateProduct, asyncDeleteProduct, asyncUpdateProduct } from "../../Store/Actions/productActions";
+import {
+  asyncCreateProduct,
+  asyncDeleteProduct,
+  asyncUpdateProduct,
+} from "../../Store/Actions/productActions";
 import { useForm } from "react-hook-form";
 
 const ProductDetails = () => {
@@ -9,7 +13,7 @@ const ProductDetails = () => {
   const products = useSelector((state) => state.product.products);
   const users = useSelector((state) => state.user.users);
   const product = products?.find((product) => product.id == id);
-  console.log(product,users);
+  
 
   const {
     register,
@@ -17,13 +21,13 @@ const ProductDetails = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues:{
-      image:product?.image,
-      title:product?.title,
-      price:product?.price,
-      category:product?.category,
-      description:product?.description,
-    }
+    defaultValues: {
+      image: product?.image,
+      title: product?.title,
+      price: product?.price,
+      category: product?.category,
+      description: product?.description,
+    },
   });
 
   const navigate = useNavigate();
@@ -31,23 +35,24 @@ const ProductDetails = () => {
 
   const submitHandler = (product) => {
     console.log(product);
-    dispatch(asyncUpdateProduct(id,product));
+    dispatch(asyncUpdateProduct(id, product));
   };
 
   if (!product) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
-        <h2 className="text-2xl font-semibold text-gray-600">Product not found</h2>
+        <h2 className="text-2xl font-semibold text-gray-600">
+          Product not found
+        </h2>
       </div>
     );
   }
-  const DeleteHandler = ()=>{
-    dispatch(asyncDeleteProduct(id))
-    navigate("/products")
-  }
+  const DeleteHandler = () => {
+    dispatch(asyncDeleteProduct(id));
+    navigate("/products");
+  };
 
-
-  return product? (
+  return product ? (
     <>
       {/* Product Display Section */}
       <div className="flex flex-col md:flex-row gap-8 p-8 bg-gradient-to-r from-blue-50 to-indigo-100 min-h-screen">
@@ -64,7 +69,9 @@ const ProductDetails = () => {
           <p className="text-gray-600">
             <span className="font-semibold">Category:</span> {product.catagory}
           </p>
-          <p className="text-3xl font-semibold text-green-600">₹ {product.price}</p>
+          <p className="text-3xl font-semibold text-green-600">
+            ₹ {product.price}
+          </p>
           <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
             Add to Cart
           </button>
@@ -83,88 +90,123 @@ const ProductDetails = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
               </svg>
             </div>
             <h2 className="text-3xl font-bold text-gray-900">Update Product</h2>
-            <p className="mt-1 text-sm text-gray-500">Modify your product details below</p>
+            <p className="mt-1 text-sm text-gray-500">
+              Modify your product details below
+            </p>
           </div>
+          {users && users?.isAdmin && (
+            <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
+              <div>
+                <label
+                  htmlFor="image"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Image URL
+                </label>
+                <input
+                  {...register("image")}
+                  id="image"
+                  type="url"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  placeholder="Enter product image URL"
+                />
+              </div>
 
-          <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
-            <div>
-              <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-              <input
-                {...register("image")}
-                id="image"
-                type="url"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-                placeholder="Enter product image URL"
-              />
-            </div>
+              <div>
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Title
+                </label>
+                <input
+                  {...register("title")}
+                  id="title"
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  placeholder="Enter product title"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-              <input
-                {...register("title")}
-                id="title"
-                type="text"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-                placeholder="Enter product title"
-              />
-            </div>
+              <div>
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Price
+                </label>
+                <input
+                  {...register("price")}
+                  id="price"
+                  type="number"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  placeholder="Enter price (e.g. 99.99)"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">Price</label>
-              <input
-                {...register("price")}
-                id="price"
-                type="number"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-                placeholder="Enter price (e.g. 99.99)"
-              />
-            </div>
+              <div>
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Description
+                </label>
+                <textarea
+                  {...register("description")}
+                  id="description"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  placeholder="Write product description"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea
-                {...register("description")}
-                id="description"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-                placeholder="Write product description"
-              />
-            </div>
+              <div>
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Category
+                </label>
+                <input
+                  {...register("category")}
+                  id="category"
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  placeholder="Enter product category"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-              <input
-                {...register("category")}
-                id="category"
-                type="text"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-                placeholder="Enter product category"
-              />
-            </div>
-
-            <div> <button
-           onClick={DeleteHandler}
-                
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-lg hover:opacity-90 transition shadow-lg"
-              >
-                Delete product
-              </button>
-              <button
-                type="submit"
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-lg hover:opacity-90 transition shadow-lg"
-              >
-                Update Product
-              </button>
-            </div>
-          </form>
-          
+              <div>
+                {" "}
+                <button
+                  onClick={DeleteHandler}
+                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-lg hover:opacity-90 transition shadow-lg"
+                >
+                  Delete product
+                </button>
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-lg hover:opacity-90 transition shadow-lg"
+                >
+                  Update Product
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </>
-  ): "Loading...."
+  ) : (
+    "Loading...."
+  );
 };
 
 export default ProductDetails;

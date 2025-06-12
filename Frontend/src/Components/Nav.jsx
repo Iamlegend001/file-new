@@ -1,10 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { asyncLogoutUser } from "../Store/Actions/userActions";
 
 const Nav = () => {
   const user = useSelector((state) => state.user.users);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandeler = () => {
+    dispatch(asyncLogoutUser());
+    navigate("/");
+  };
+
   console.log(user);
+
   return (
     <div className="mb-10 flex justify-center py-4 bg-gray-50 border-b border-gray-200">
       <div className="flex gap-8">
@@ -46,7 +56,6 @@ const Nav = () => {
         </NavLink>
         {user ? (
           <>
-            {" "}
             <NavLink
               to="/admin/create-product"
               className={({ isActive }) =>
@@ -59,6 +68,12 @@ const Nav = () => {
             >
               Create Product
             </NavLink>
+            <button
+              className="text-lg font-medium transition-colors duration-200"
+              onClick={logoutHandeler}
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
